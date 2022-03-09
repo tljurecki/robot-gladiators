@@ -1,5 +1,11 @@
+var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+  return value;
+};
+
 // fight function (now with parameter for enemy's name)
-var fight = function(enemy.name) {
+var fight = function(enemy) {
   while (playerInfo.health > 0 && enemy.health > 0) {
     // ask player if they'd like to fight or run
     var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
@@ -20,7 +26,7 @@ var fight = function(enemy.name) {
     }
 
     // remove enemy's health by subtracting the amount set in the playerAttack variable
-    var damage = randomNumber(playerAttack - 3, playerAttack);
+    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
     enemy.health = Math.max(0, enemy.health - damage);
     console.log(
       playerInfo.name + ' attacked ' + enemy.name + '. ' + enemy.name + ' now has ' + enemy.health + ' health remaining.'
@@ -56,11 +62,7 @@ var fight = function(enemy.name) {
     }
   }
 };
-var randomNumber = function(min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
 
-    return value;
-};
 
 // function to start a new game
 var startGame = function() {
@@ -157,8 +159,16 @@ var shop = function() {
       break;
   }
 };
+var getPlayerName = function() {
+  var name ="";
+  while (name === "" || name === null) {
+    name = prompt("What is your robot's name?");
+  }
+  console.log("Your robot's name is " + name);
+  return name;
+};
 var playerInfo = {
-  name: window.prompt("What is your robot's name?"),
+  name: getPlayerName(),
   health: 100,
   attack: 10,
   money: 10,
